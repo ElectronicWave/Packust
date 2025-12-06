@@ -1,7 +1,11 @@
-[package]
-name = "packust"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+resolver = "3"
+members = [
+    "inventium"
+]
 
-[dependencies]
-clap = { version = "4.5.47", features = ["derive"] }
+[workspace.dependencies]
+anyhow = "1.0.100"
+reqwest = "0.12.24"
+serde = "1.0.228"
+tokio = "1.48.0"
