@@ -35,11 +35,11 @@ impl Request {
         })
     }
 
-    pub async fn get<T: DeserializeOwned>(&self, url: impl IntoUrl) -> RequestBuilder {
+    pub async fn get(&self, url: impl IntoUrl) -> RequestBuilder {
         self.key.insert(self.client.get(url))
     }
 
-    pub fn post<T: DeserializeOwned, B: Serialize + ?Sized>(&self, url: impl IntoUrl, body: &B) -> RequestBuilder {
+    pub fn post<B: Serialize>(&self, url: impl IntoUrl, body: &B) -> RequestBuilder {
         self.key.insert(self.client.post(url).json(body))
     }
 }
