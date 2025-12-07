@@ -37,7 +37,7 @@ impl Rinth {
     }
 
     async fn post<T: DeserializeOwned, B: Serialize>(&self, url: Url, body: B) -> Result<Response<T>> {
-        let byte = self.request.post(url, &body).send().await?.error_for_status()?.bytes().await?;
+        let byte = self.request.post(url, &body).await.send().await?.error_for_status()?.bytes().await?;
         Ok(serde_json::from_slice(&byte)?)
     }
 }

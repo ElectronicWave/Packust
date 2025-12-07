@@ -25,18 +25,7 @@ fn check_rate_limit(response: Response) -> Result<Response> {
     if response.status() == StatusCode::GONE {
         Err(Error::msg("API Deprecated"))
     } else if response.status() == StatusCode::TOO_MANY_REQUESTS {
-        Err(Error::msg("Rate limit exceeded").context(
-            response
-                .headers()
-                .get("X-Ratelimit-Reset")
-                .map(|header| {
-                    header
-                        .to_str()
-                        .expect("Corrupted ratelimit header")
-                        .parse()
-                        .expect("Corrupted ratelimit header")
-                })
-                .expect("Corrupted ratelimit header"),))
+        Err(Error::msg("Rate limit exceeded"))
     } else {
         Ok(response)
     }

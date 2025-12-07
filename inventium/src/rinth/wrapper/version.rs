@@ -7,16 +7,17 @@ use crate::rinth::structs::version::Version;
 use crate::rinth::url::{UrlJoinAll, UrlWithQuery};
 use crate::rinth::Rinth;
 use anyhow::Result;
+use crate::rinth::request::RequestBuilderCustomSend;
 
 impl Rinth {
     pub async fn version_list(&self, project_id: &str) -> Result<Vec<Version>> {
         check_id_slug(&[project_id])?;
         self.request
             .get(self.base_url.join_all(vec!["project", project_id, "version"]))
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
-    
+
     pub async fn version_list_filtered(
         &self,
         project_id: &str,
@@ -35,25 +36,25 @@ impl Rinth {
         if let Some(featured) = featured {
             url = url.with_query_json("featured", featured)?;
         }
-        self.request.get(url).custom_send_json().await
+        self.request.get(url).await.custom_send_json().await
     }
-    
+
     pub async fn version_get(&self, version_id: &str) -> Result<Version> {
         check_id_slug(&[version_id])?;
         self.request
             .get(self.base_url.join_all(vec!["version", version_id]))
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
-    
+
     pub async fn version_get_from_number(&self, project_id: &str, number: &str) -> Result<Version> {
         check_id_slug(&[project_id])?;
         self.request
             .get(self.base_url.join_all(vec!["project", project_id, "version", number]))
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
-    
+
     pub async fn version_get_multiple(&self, version_ids: &[&str]) -> Result<Vec<Version>> {
         check_id_slug(version_ids)?;
         self.request
@@ -62,7 +63,7 @@ impl Rinth {
                     .join_all(vec!["versions"])
                     .with_query_json("ids", version_ids)?,
             )
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 }

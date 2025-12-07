@@ -6,7 +6,7 @@ use serde::Serialize;
 
 pub mod curse;
 pub mod key;
-mod rinth;
+pub mod rinth;
 
 pub enum Platform {
     CurseForge,
@@ -39,7 +39,7 @@ impl Request {
         self.key.insert(self.client.get(url))
     }
 
-    pub fn post<B: Serialize>(&self, url: impl IntoUrl, body: &B) -> RequestBuilder {
+    pub async fn post<B: Serialize>(&self, url: impl IntoUrl, body: &B) -> RequestBuilder {
         self.key.insert(self.client.post(url).json(body))
     }
 }

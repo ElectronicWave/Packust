@@ -1,9 +1,9 @@
-use super::*;
 use crate::rinth::structs::search::{Facet, Response, Sort};
 use crate::rinth::structs::Int;
 use crate::rinth::url::{UrlJoinAll, UrlWithQuery};
 use crate::rinth::Rinth;
 use anyhow::Result;
+use crate::rinth::request::RequestBuilderCustomSend;
 
 impl Rinth {
     pub async fn search_paged(
@@ -26,7 +26,7 @@ impl Rinth {
             url = url.with_query_json("facets", facets)?
         }
 
-        self.request.get(url).custom_send_json().await
+        self.request.get(url).await.custom_send_json().await
     }
 
     pub async fn search(
@@ -45,6 +45,6 @@ impl Rinth {
             url = url.with_query_json("facets", facets)?
         }
 
-        self.request.get(url).custom_send_json().await
+        self.request.get(url).await.custom_send_json().await
     }
 }

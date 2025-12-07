@@ -8,13 +8,14 @@ use crate::rinth::url::{UrlJoinAll, UrlWithQuery};
 use crate::rinth::wrapper::check_id_slug;
 use crate::rinth::Rinth;
 use anyhow::Result;
+use crate::rinth::request::RequestBuilderCustomSend;
 
 impl Rinth {
     pub async fn project_get(&self, project_id: &str) -> Result<Project> {
         check_id_slug(&[project_id])?;
         self.request
             .get(self.base_url.join_all(vec!["project", project_id]))
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 
@@ -26,7 +27,7 @@ impl Rinth {
                     .join_all(vec!["projects"])
                     .with_query_json("ids", project_ids)?,
             )
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 
@@ -37,7 +38,7 @@ impl Rinth {
                     .join_all(vec!["projects_random"])
                     .with_query("count", count),
             )
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 
@@ -50,7 +51,7 @@ impl Rinth {
         let res: Response = self
             .request
             .get(self.base_url.join_all(vec!["project", project_id, "check"]))
-            .custom_send_json()
+            .await.custom_send_json()
             .await?;
         Ok(res.id)
     }
@@ -59,7 +60,7 @@ impl Rinth {
         check_id_slug(&[project_id])?;
         self.request
             .get(self.base_url.join_all(vec!["project", project_id, "dependencies"]))
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 }

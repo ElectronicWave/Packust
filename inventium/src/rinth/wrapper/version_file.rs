@@ -12,7 +12,7 @@ impl Rinth {
         check_sha1_hash(&[hash])?;
         self.request
             .get(self.base_url.join_all(vec!["version_file", hash]))
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 
@@ -32,7 +32,7 @@ impl Rinth {
                 hashes,
                 algorithm: HashAlgorithm::SHA1,
             })
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 
@@ -48,7 +48,7 @@ impl Rinth {
                     .join_all(vec!["version_file", hash, "update"])
                     .with_query_json("algorithm", HashAlgorithm::SHA1)?,
             filters)
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 
@@ -65,7 +65,7 @@ impl Rinth {
                 loaders: filters.loaders,
                 game_versions: filters.game_versions,
             })
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 }

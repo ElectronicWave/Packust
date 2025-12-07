@@ -12,7 +12,7 @@ impl Rinth {
     pub async fn instance_statistics(&self) -> Result<Statistics> {
         self.request
             .get(self.base_url.join_all(vec!["statistics"]))
-            .custom_send_json()
+            .await.custom_send_json()
             .await
     }
 }
