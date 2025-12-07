@@ -1,4 +1,3 @@
-use crate::curse::structs::mod_structs::Mod;
 use super::*;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]

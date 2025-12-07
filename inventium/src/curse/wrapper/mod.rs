@@ -1,5 +1,10 @@
-mod mods;
-mod search;
+/// API Calls code copy from [Furse](https://github.com/gorilla-devs/furse/tree/master/src/api_calls)
+/// Under [Furse MIT License](https://github.com/gorilla-devs/furse/blob/master/LICENSE.txt)
+
+pub mod mods;
+pub mod search;
+pub mod files;
+pub mod fingerprint;
 
 use crate::curse::structs::common_structs;
 

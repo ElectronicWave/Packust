@@ -1,4 +1,17 @@
+use crate::curse::Curse;
 use crate::curse::structs::common_structs::{Category, ModLoaderType};
+use crate::curse::structs::mod_structs::Mod;
+
+impl Curse {
+    pub async fn search_mods(&self, param: SearchModsParam) -> anyhow::Result<Vec<Mod>> {
+        Ok(self
+            .get(
+                self.base_url.join(&*param.build(UrlBuilder::new("mods/search")).url)?,
+            )
+            .await?
+            .data)
+    }
+}
 
 pub struct UrlBuilder {
     pub url: String,

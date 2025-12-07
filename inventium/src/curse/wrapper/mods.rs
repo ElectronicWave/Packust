@@ -1,8 +1,7 @@
-use crate::curse::Curse;
-use crate::curse::structs::ID;
-use anyhow::Result;
-use crate::curse::structs::common_structs::{Category, ModLoaderType};
 use crate::curse::structs::mod_structs::Mod;
+use crate::curse::structs::ID;
+use crate::curse::Curse;
+use anyhow::Result;
 
 impl Curse {
     pub async fn get_mod(&self, mod_id: ID) -> Result<Mod> {
@@ -35,16 +34,6 @@ impl Curse {
                     .join("mods/")?
                     .join(&(mod_id.to_string() + "/"))?
                     .join("description")?,
-            )
-            .await?
-            .data)
-    }
-
-    pub async fn search_mods(&self, query: &str) -> Result<Vec<Mod>> {
-
-        Ok(self
-            .get(
-                self.base_url.join("mods/search?")?,
             )
             .await?
             .data)

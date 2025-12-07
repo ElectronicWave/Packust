@@ -1,12 +1,12 @@
-use reqwest::{Client, IntoUrl, RequestBuilder, Response};
-use anyhow::Result;
-use reqwest::header::{HeaderMap, HeaderName, HeaderValue, ACCEPT, CONTENT_TYPE, USER_AGENT};
-use serde::de::DeserializeOwned;
-use serde::Serialize;
 use crate::key::ApiKey;
+use anyhow::Result;
+use reqwest::header::{HeaderMap, HeaderValue, ACCEPT, CONTENT_TYPE};
+use reqwest::{Client, IntoUrl, RequestBuilder};
+use serde::Serialize;
 
 pub mod curse;
 pub mod key;
+mod rinth;
 
 pub enum Platform {
     CurseForge,
