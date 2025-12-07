@@ -1,7 +1,10 @@
 [workspace]
 resolver = "3"
 members = [
-    "inventium"
+    "inventium",
+    "expedio",
+    "procurator",
+    "packust"
 ]
 
 [workspace.dependencies]

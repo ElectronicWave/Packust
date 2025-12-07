@@ -1,0 +1,8 @@
+[package]
+name = "packust"
+version = "0.0.1"
+edition = "2024"
+authors = ["Oganesson897 <oganesson897@gmail.com>"]
+description = "Package Manager Application for Minecraft Modpacks"
+repository = "https://github.com/ElectronicWave/Packust"
+license = "AGPL-3"
